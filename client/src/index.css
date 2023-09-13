@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family:  "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+.content {
+  /* padding-top: 70px; */
+  /* Adjust the padding-top value as needed to avoid overlap with the Navbar */
+}
+
+.active {
+  background-color: orange;
+  color: black;
+}
+
+.title_head h2 { 
+  font-family: "Open Sans",serif;  
+}
+
+
+.title_head h2::before, .title_head h2::after {
+  display: inline-block; 
+  height: 1px;
+  content: "\a0";
+  background-color: #ddd;
+  text-align: center;
+  position: relative;
+  top: 0.7em;
+  margin: 0 10px; 
+  width: 90px; 
+}
+
+
+/* Container hover effect */
+.hover-card {
+  transition: transform 0.3s ease;
+}
+
+.image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+  /* width: 100%;
+  height: 200px;
+  object-fit: cover; */
+}
+/* Image hover effect */
+.image-container:hover .image {
+  transform: scale(1.1); /* Adjust the scale factor to control the zoom level */
+  filter: brightness(0.8); 
+  transition: all 400ms linear 0s;
+}
+
+.slick-slide, .slick-slide:not(:last-child) {
+  padding: 7px;  
+}
+
+/* Style the dot container */
+.slick-dots {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; 
+}
+
+/* Style individual dots */
+.slick-dots li {
+  margin: 0 5px;   
+}
+
+/* Style the active dot */
+.slick-dots li.slick-active button {
+  background-color: #3454d1; 
+  border-radius: 50%;  
+}
+
+
+/* Hide the increase and decrease buttons on number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; 
+}
+
+/* spinner loader */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
