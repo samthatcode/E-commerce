@@ -2,12 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import ProductPage from "./ProductPage";
-import LandPage from "./LandPage";
 import Layout from "../components/Layout";
 import { AiOutlineEnvironment } from "react-icons/ai";
 import { FaBath, FaBed, FaDoorOpen, FaRuler } from "react-icons/fa";
-import { FiMapPin } from "react-icons/fi";
-import { GiRoad } from "react-icons/gi";
 import { UserContext } from "../contexts/UserContext";
 import { FaSpinner } from "react-icons/fa";
 
@@ -62,7 +59,6 @@ const CartListPage = () => {
             const numberOfBeds = item.numberOfBeds || null;
             const numberOfRooms = item.numberOfRooms || null;
             const squareFootage = item.squareFootage || null;
-            const acreage = item.acreage || null;
 
             return (
               <div key={id} className="border p-3 w-full">
@@ -176,91 +172,6 @@ const CartListPage = () => {
                     </button>
                   </div>
                 )}
-                {type === "land" && (
-                  <div className="">
-                    {images.length > 0 && (
-                      <img
-                        src={`https://surefinders-backend.onrender.com/public/images/${item.images[0]}`}
-                        // src={`http://localhost:5175/public/images/${item.images[0]}`}
-                        alt={item.title}
-                        className="w-full max-h-60 object-cover image"
-                      />
-                    )}
-                    <div className="flex justify-between items-center my-4">
-                      <div className="">
-                        <span className="text-sm font-medium capitalize text-indigo-500 bg-indigo-100 p-1 py-1 px-2 last:mr-0 mr-1 mb-2">
-                          {title}
-                        </span>
-                        <p className="text-title text-lg capitalize break-words font-bold my-2">
-                          {description.length > 15
-                            ? `${description.substring(0, 15)}...`
-                            : description}
-                        </p>
-
-                        <p className="text-[14px] text-slate-500 capitalize flex justify-start items-center mb-3">
-                          <FiMapPin className="text-gray-400 mr-1" />
-                          {location}
-                        </p>
-                        <div className="flex">
-                          <div className="flex flex-row gap-4 text-sm text-zinc-500 mr-4">
-                            <div className="flex-col">
-                              <p className="mb-2">Acreage</p>
-                              <div className="flex justify-center items-center">
-                                <span className="mr-1">
-                                  <GiRoad />
-                                </span>
-                                <p>{acreage} Acres</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex justify-between items-center">
-                          <p className="text-lg text-title font-bold border-t my-2">
-                            &#x20A6;{price}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <label className="mr-2">Quantity:</label>
-                      <input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          updateQuantity(item.id, parseInt(e.target.value))
-                        }
-                        className="w-10 px-2 py-1 border border-gray-300 rounded text-gray-800 mr-5 text-center"
-                      />
-                      <div className="flex items-center justify-between gap-4">
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          disabled={item.quantity === 1}
-                          className="px-4 border border-gray-300 bg-red hover:text-gray-300 rounded text-gray-800 text-center text-xl cursor-pointer"
-                        >
-                          -
-                        </button>
-                        <button
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                          className="px-4 border border-gray-300 bg-green hover:text-gray-300 rounded text-gray-800 text-center text-xl cursor-pointer"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                    <button
-                      className="mt-4 px-4 py-2 bg-red text-white rounded hover:text-slate-300"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                )}
               </div>
             );
           })}
@@ -312,7 +223,6 @@ const CartListPage = () => {
         )}
 
         <ProductPage />
-        <LandPage />
       </div>
     </Layout>
   );

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator');
 const User = require('../Models/UserModel');
-const Client = require('../Models/ClientModel');
-const Referral = require('../Models/ReferralModel');
 const { createSecretToken } = require("../util/SecretToken");
 const tokenBlacklist = new Set(); // Create the token blacklist set
 const bcrypt = require('bcryptjs');
@@ -67,14 +65,8 @@ module.exports.Signup = async (req, res, next) => {
       email,
       password,
       firstName,
-      lastName,
-      phoneNumber,
-      address,
-      stateProvince,
-      country,
-      profession,
-      discoverySource,
-      referralId: referral_id,
+      lastName,      
+
       createdAt } = req.body;
 
     // Validate input
@@ -94,39 +86,15 @@ module.exports.Signup = async (req, res, next) => {
       email,
       password,
       firstName,
-      lastName,
-      phoneNumber,
-      address,
-      stateProvince,
-      country,
-      profession,
-      discoverySource,
-      referral_id,
+      lastName,     
       role: "user",
       createdAt
     });
-
-    // Convert the referral_id to a valid ObjectId
-    const objectIdReferralId = new mongoose.Types.ObjectId(referral_id);
-    const client = await Client.create({
-      name: firstName + ' ' + lastName,
-      email,
-      associatedMarketer: objectIdReferralId,
-    });
-
-    // If a referral_id was provided, create a new Referral
-    if (referral_id) {
-      await Referral.create({
-        referringMarketer: objectIdReferralId,
-        referredClient: client._id,
-      });
-    }
 
 
     // Create the verification token
     const verificationToken = new Token({
       _userId: user._id,
-      _marketerId: user._id,
       token: crypto.randomBytes(16).toString('hex')
     });
 
@@ -143,9 +111,9 @@ module.exports.Signup = async (req, res, next) => {
       subject: "Account Verification",
       text: `Click the link to verify your account: ${verificationLink}`,
       html: `<div>
-          <p>Thank you for creating an account with Surefinders! To ensure the security of your account, please verify your email address by clicking the link below:</p>
+          <p>Thank you for creating an account with ShoeStore! To ensure the security of your account, please verify your email address by clicking the link below:</p>
           <a href=${verificationLink}>Click here to verify your account</a>
-          </div>` 
+          </div>`
     }, (error, info) => {
       if (error) {
         console.log('Error occurred while sending email:', error);

@@ -2,18 +2,15 @@ import React from "react";
 import Hero from "./Hero";
 import ContactUs from "./ContactUs";
 import Layout from "./Layout";
-import { InvestmentPage, LandPage, ProductPage } from "../pages";
-import Events from "./Event/Events";
+import {  ProductPage } from "../pages";
+
 
 const Home = () => {
   return (
     <div> 
       <Layout>
         <Hero />
-        <ProductPage />
-        <LandPage />      
-        <InvestmentPage />
-        <Events />
+        <ProductPage />        
         <ContactUs />     
       </Layout>  
     </div>

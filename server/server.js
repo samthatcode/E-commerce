@@ -39,14 +39,6 @@ const orderRoute = require('./Routes/OrderRoute');
 const purchaseRoute = require('./Routes/PurchaseRoute');
 const productRoute = require('./Routes/ProductRoute');
 const adminRoute = require('./Routes/AdminRoute');
-const marketerRoute = require('./Routes/MarketerRoute');
-const eventRoute = require('./Routes/EventRoute');
-const clientRoute = require('./Routes/ClientRoute');
-const referralRoute = require('./Routes/ReferralRoute');
-const landRoute = require('./Routes/LandRoute');
-const recruitmentRoute = require('./Routes/RecruitmentRoute');
-const investmentRoute = require('./Routes/InvestmentRoute');
-const registrationRoute = require('./Routes/RegistrationRoute');
 const roleRoute = require('./Routes/RoleRoute');
 const categoryRoute = require('./Routes/CategoryRoute');
 const verificationRoute = require('./Routes/VerificationRoute');
@@ -55,8 +47,8 @@ const contactRoute = require('./Routes/ContactRoute');
 const ErrorHandler = require('./Middlewares/ErrorHandler');
 
 const MONGODB_URI = process.env.MONGODB_URI;
-// const PORT = process.env.PORT || 5175;
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 5175;
+// const PORT = process.env.PORT || 10000;
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
@@ -103,8 +95,8 @@ mongoose.connect(MONGODB_URI, {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["https://surefinders-frontend.onrender.com"],
-    // origin: ["http://localhost:5175", "http://localhost:5174"],
+    // origin: ["https://surefinders-frontend.onrender.com"],
+    origin: ["http://localhost:5175", "http://localhost:5174"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -121,14 +113,6 @@ app.use('/api', orderRoute);
 app.use('/api', purchaseRoute);
 app.use('/api', productRoute);
 app.use('/api', adminRoute);
-app.use('/api', marketerRoute);
-app.use('/api', eventRoute);
-app.use('/api', clientRoute);
-app.use('/api', referralRoute);
-app.use('/api', landRoute);
-app.use('/api', recruitmentRoute);
-app.use('/api', investmentRoute);
-app.use('/api', registrationRoute);
 app.use('/api', roleRoute);
 app.use('/api', categoryRoute);
 app.use('/api', verificationRoute);

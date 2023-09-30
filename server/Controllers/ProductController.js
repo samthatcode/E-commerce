@@ -24,14 +24,10 @@ const validateCategory = async (categoryId) => {
 module.exports.createProduct = async (req, res, next) => {
     // console.log(req.files);
     try {
-        const { title,
+        const { name,
             description,
             price,
-            location,
-            numberOfRooms,
-            squareFootage,
-            numberOfBeds,
-            numberOfBaths,
+
             categoryId } = req.body;
 
         let images = req.files; // Get the uploaded images from req.files
@@ -58,14 +54,9 @@ module.exports.createProduct = async (req, res, next) => {
         validatedCategoryId = await validateCategory(validatedCategoryId);
 
         const createdProduct = await Product.create({
-            title,
+            name,
             description,
             price,
-            location,
-            numberOfRooms,
-            squareFootage,
-            numberOfBeds,
-            numberOfBaths,
             images: imagePaths, // Save the paths of the uploaded images
             categoryId: validatedCategoryId,
         });
@@ -130,14 +121,9 @@ module.exports.updateProduct = async (req, res, next) => {
         let newImagePaths = Array.isArray(newImages) ? newImages.map(file => path.relative(dir, file.path).replace(/\\/g, '/')) : [];
 
 
-        const { title,
+        const { name,
             description,
             price,
-            location,
-            numberOfRooms,
-            squareFootage,
-            numberOfBeds,
-            numberOfBaths,
             categoryId } = req.body;
 
         // Check if categoryId exists
@@ -165,14 +151,9 @@ module.exports.updateProduct = async (req, res, next) => {
         product.markModified('images'); // Tell Mongoose that the images field has been updated
 
         // Update other fields
-        product.title = title;
+        product.name = name;
         product.description = description;
         product.price = price;
-        product.location = location;
-        product.numberOfRooms = numberOfRooms;
-        product.squareFootage = squareFootage;
-        product.numberOfBeds = numberOfBeds;
-        product.numberOfBaths = numberOfBaths;
         product.categoryId = validatedCategoryId;
 
         // Save the product

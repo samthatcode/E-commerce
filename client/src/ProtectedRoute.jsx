@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./contexts/UserContext";
-import { MarketerContext } from "./contexts/MarketerContext";
 
 const ProtectedRoute = ({ roles, children }) => {
   const { user } = useContext(UserContext);
-  const { marketer } = useContext(MarketerContext);
+
   const navigate = useNavigate();
   const isAuthenticated = user || marketer;
-  const role = user ? user.role : marketer ? marketer.role : null;
+  const role = user ? user.role : null;
 
   // console.log("Is authenticated:", isAuthenticated);
   // console.log("Role:", role);
@@ -21,9 +20,7 @@ const ProtectedRoute = ({ roles, children }) => {
 
   // if authenticated but role not allowed, redirect to appropriate page
   if (!roles.includes(role)) {
-    if (role === "marketer") {
-      navigate("/marketer/login");
-    } else {
+    if (role === "user") {
       navigate("/login");
     }
     return null;

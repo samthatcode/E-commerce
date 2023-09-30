@@ -32,7 +32,11 @@ const CategoryManagement = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://surefinders-backend.onrender.com/api/categories", { withCredentials: true });
+      const response = await axios.get(
+        // "https://surefinders-backend.onrender.com/api/categories",
+        "api/categories",
+        
+        { withCredentials: true });
       setCategories(response.data.data);
     } catch (error) {
       console.error(error);
@@ -43,7 +47,10 @@ const CategoryManagement = () => {
   const createCategory = async () => {
     setIsCreatingCategory(true);
     try {
-      const response = await axios.post("https://surefinders-backend.onrender.com/api/categories", newCategory,{ withCredentials: true });
+      const response = await axios.post(
+        // "https://surefinders-backend.onrender.com/api/categories", 
+        "api/categories",
+        newCategory,{ withCredentials: true });
       const createdCategory = response.data.data;
       toast.success("Category created successfully");
       setCategories([...categories, createdCategory]);
@@ -67,7 +74,11 @@ const CategoryManagement = () => {
       return;
     }
     try {
-      await axios.put(`https://surefinders-backend.onrender.com/api/categories/${id}`, updatedCategory, { withCredentials: true });
+      await axios.put(
+        // `https://surefinders-backend.onrender.com/api/categories/${id}`, 
+        `api/categories/${id}`,
+      
+      updatedCategory, { withCredentials: true });
       fetchCategories();
       toast.success("Category updated successfully");
       setIsFormSubmitted(true);
@@ -79,14 +90,17 @@ const CategoryManagement = () => {
 
   const openModal = (category) => {
     setEditingCategory(category);
-    setNewCategory(category);
+    setNewCategory({ ...category });
     setIsModalOpen(true);
   };
 
   const deleteCategory = async (id) => {
     if (window.confirm("Are you sure you want to delete this category?")) {
       try {
-        await axios.delete(`https://surefinders-backend.onrender.com/api/categories/${id}`, { withCredentials: true });
+        await axios.delete(
+          // `https://surefinders-backend.onrender.com/api/categories/${id}`, 
+          `api/categories/${id}`,
+        { withCredentials: true });
         fetchCategories();
         toast.success("Category deleted successfully");
       } catch (error) {

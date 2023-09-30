@@ -5,17 +5,12 @@ import Drawer from "@mui/material/Drawer";
 import { PieChart, Pie, Cell } from "recharts";
 import {
   CategoryManagement,
-  EventManagement,
   Footer,
-  InvestmentManagement,
-  LandManagement,
   ProductManagement,
-  RoleManagement,
   UserManagement,
 } from "../components";
-import StyledTable from "./StyledTable";
-import axios from "axios";
 
+import axios from "axios";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -23,8 +18,7 @@ const AdminDashboard = () => {
   const { user, setUser } = useContext(UserContext);
   const [totalProductsCount, setTotalProductsCount] = useState(0);
   const [totalUsersCount, setTotalUsersCount] = useState(0);
-  const [error, setError] = useState("");
-  const [inactiveMarketers, setInactiveMarketers] = useState([]);
+  const [error, setError] = useState("");  
   const [currentView, setCurrentView] = useState("");
 
   const navigate = useNavigate();
@@ -87,60 +81,11 @@ const AdminDashboard = () => {
       }
     };
 
-    const fetchInactiveMarketers = async () => {
-      try {
-        const response = await fetch(
-          // "https://surefinders-backend.onrender.com/api/marketers",
-          "/api/marketers",
-          { withCredentials: true }
-        );       
-        const data = await response.json();
-        // console.log(data);
-
-        // Filter inactive marketers
-        const inactiveMarketers = data.data.filter(
-          (marketer) => marketer.isActive === false
-        );
-        // console.log("Inactive marketers:", inactiveMarketers);
-        setInactiveMarketers(inactiveMarketers);
-      } catch (error) {
-        console.error("Error fetching inactive marketers:", error);
-        setError("Failed to fetch inactive marketers. Please try again later.");
-      }
-    };
-
     fetchProducts();
     fetchUsers();
-    fetchInactiveMarketers();
   }, []);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const approveMarketer = async (marketerId) => {
-    try {
-      const response = await fetch(
-        `https://surefinders-backend.onrender.com/api/marketers/${marketerId}/approve`,
-        // `/api/marketers/${marketerId}/approve`,
-        { withCredentials: true ,
-          method: "POST",
-        }
-      );      
-
-      // console.log("Response status:", response.status);
-      const data = await response.json();
-      // console.log(data);
-
-      if (data.success) {
-        setInactiveMarketers(
-          inactiveMarketers.filter((marketer) => marketer._id !== marketerId)
-        );
-      
-      }
-    } catch (error) {
-      console.error("Error approving marketer:", error);
-      setError("Failed to approve marketer. Please try again later.");
-    }
-  };
 
   return (
     <>
@@ -161,16 +106,6 @@ const AdminDashboard = () => {
             >
               Manage Products
             </Link>
-            <Link
-              to="/managelands"
-              className={`block py-2 px-4 rounded bg-primary hover:bg-blue text-white transition-colors font-medium mb-4 active`}
-              onClick={(event) => {
-                event.preventDefault();
-                setCurrentView("managelands");
-              }}
-            >
-              Manage Lands
-            </Link>
 
             <Link
               to="/manageusers"
@@ -182,16 +117,7 @@ const AdminDashboard = () => {
             >
               Manage Users
             </Link>
-            <Link
-              to="/manageinvestments"
-              className={`block py-2 px-4 rounded bg-primary hover:bg-blue text-white transition-colors font-medium mb-4 active`}
-              onClick={(event) => {
-                event.preventDefault();
-                setCurrentView("manageinvestments");
-              }}
-            >
-              Manage Investments
-            </Link>
+
             <Link
               to="/managecategories"
               className={`block py-2 px-4 rounded bg-primary hover:bg-blue text-white transition-colors font-medium mb-4 active`}
@@ -201,16 +127,6 @@ const AdminDashboard = () => {
               }}
             >
               Manage Categories
-            </Link>
-            <Link
-              to="/manage_event"
-              className={`block py-2 px-4 rounded bg-primary hover:bg-blue text-white transition-colors font-medium mb-4 active`}
-              onClick={(event) => {
-                event.preventDefault();
-                setCurrentView("manage_event");
-              }}
-            >
-              Manage Event
             </Link>
 
             {/* Add more links as needed */}
@@ -241,11 +157,8 @@ const AdminDashboard = () => {
           <h1 className="text-xl font-bold mb-4 text-title">Welcome, Admin!</h1>
           {/* Dashboard content goes here */}
           {currentView === "manageproducts" && <ProductManagement />}
-          {currentView === "managelands" && <LandManagement />}
           {currentView === "manageusers" && <UserManagement />}
-          {currentView === "manageinvestments" && <InvestmentManagement />}
           {currentView === "managecategories" && <CategoryManagement />}
-          {currentView === "manage_event" && <EventManagement />}
 
           {error ? (
             <div className="p-4 bg-red text-white rounded">
@@ -317,11 +230,6 @@ const AdminDashboard = () => {
               </div>
             </div>
           )}
-
-          <StyledTable
-            data={inactiveMarketers}
-            approveMarketer={approveMarketer}
-          />
         </main>
       </div>
       <Footer />

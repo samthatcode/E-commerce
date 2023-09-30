@@ -20,7 +20,7 @@ export default {
         darkslategray: "#4C787E", // Dark Slate Gray
         grayishslate: "#5E7D7E", // Grayish Slate
         // New colors
-        blue: "#007bff",
+        blue: "#56cfe1",
         // indigo: "#6610f2",
         // purple: "#6f42c1",
         // pink: "#e83e8c",
@@ -32,7 +32,7 @@ export default {
         // white: "#fff",
         // gray: "#6c757d",
         // graydark: "#343a40",
-        primary: "#3454d1",
+        primary: "#01bad4",
         // secondary: "#6c757d",
         // success: "#28a745",
         // info: "#17a2b8",

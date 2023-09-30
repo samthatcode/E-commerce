@@ -4,7 +4,6 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 Modal.setAppElement("#root");
 const modalStyles = {
   content: {
@@ -21,14 +20,10 @@ const ProductManagement = () => {
   const [products, setProducts] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
     description: "",
     price: "",
-    location: "",
-    numberOfRooms: "",
-    squareFootage: "",
-    numberOfBeds: "",
-    numberOfBaths: "",
+
     images: [],
     categoryId: "",
   });
@@ -45,14 +40,10 @@ const ProductManagement = () => {
   useEffect(() => {
     if (isFormSubmitted) {
       setFormData({
-        title: "",
+        name: "",
         description: "",
         price: "",
-        location: "",
-        numberOfRooms: "",
-        squareFootage: "",
-        numberOfBeds: "",
-        numberOfBaths: "",
+
         images: [],
         categoryId: "",
       });
@@ -64,8 +55,8 @@ const ProductManagement = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        // "/api/products",
-        "https://surefinders-backend.onrender.com/api/products",
+        "/api/products",
+        // "https://surefinders-backend.onrender.com/api/products",
         { withCredentials: true }
       );
       setProducts(response.data.data);
@@ -79,8 +70,8 @@ const ProductManagement = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          // "/api/categories",
-          "https://surefinders-backend.onrender.com/api/categories",
+          "/api/categories",
+          // "https://surefinders-backend.onrender.com/api/categories",
           { withCredentials: true }
         );
         setCategories(response.data.data);
@@ -138,7 +129,7 @@ const ProductManagement = () => {
     try {
       // Create a new FormData object
       const formDataToSend = new FormData();
-      // console.log("formData images:", formData["images"]); 
+      // console.log("formData images:", formData["images"]);
       // Inside createProduct function
       for (const key in formData) {
         if (key === "images") {
@@ -152,15 +143,15 @@ const ProductManagement = () => {
         }
       }
 
-      // console.log("image after loop:", formDataToSend.getAll("images")); 
+      // console.log("image after loop:", formDataToSend.getAll("images"));
       // Make the API request to send the form data to the server
       for (let pair of formDataToSend.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
 
       const response = await axios.post(
-        // "/api/products",
-        "https://surefinders-backend.onrender.com/api/products",
+        "/api/products",
+        // "https://surefinders-backend.onrender.com/api/products",
         formDataToSend,
         { withCredentials: true }
       );
@@ -170,14 +161,10 @@ const ProductManagement = () => {
       setFiles([]);
       // Reset the form
       setFormData({
-        title: "",
+        name: "",
         description: "",
         price: "",
-        location: "",
-        numberOfRooms: "",
-        squareFootage: "",
-        numberOfBeds: "",
-        numberOfBaths: "",
+
         images: [],
         categoryId: "",
       });
@@ -214,8 +201,8 @@ const ProductManagement = () => {
       }
       // Send the formData with the PUT request
       await axios.put(
-        // `/api/products/${id}`,
-        `https://surefinders-backend.onrender.com/api/products/${id}`,
+        `/api/products/${id}`,
+        // `https://surefinders-backend.onrender.com/api/products/${id}`,
         formData,
         { withCredentials: true }
       );
@@ -225,14 +212,10 @@ const ProductManagement = () => {
       setIsFormSubmitted(true);
       // Reset the form
       setFormData({
-        title: "",
+        name: "",
         description: "",
         price: "",
-        location: "",
-        numberOfRooms: "",
-        squareFootage: "",
-        numberOfBeds: "",
-        numberOfBaths: "",
+
         images: [],
         categoryId: "",
       });
@@ -246,8 +229,8 @@ const ProductManagement = () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         await axios.delete(
-          // `/api/products/${id}`,
-          `https://surefinders-backend.onrender.com/api/products/${id}`,
+          `/api/products/${id}`,
+          // `https://surefinders-backend.onrender.com/api/products/${id}`,
           { withCredentials: true }
         );
         fetchProducts();
@@ -262,28 +245,20 @@ const ProductManagement = () => {
   const openModal = (product) => {
     // Extract the properties needed for the form data
     const {
-      title,
+      name,
       description,
       price,
-      location,
-      numberOfRooms,
-      squareFootage,
-      numberOfBeds,
-      numberOfBaths,
+
       categoryId,
     } = product;
     // Create a new object with the extracted properties and set it as the form data
     setFormData({
-      title,
+      name,
       description,
       price,
-      location,
-      numberOfRooms,
-      squareFootage,
-      numberOfBeds,
-      numberOfBaths,
+
       categoryId,
-      images: [], 
+      images: [],
     });
     setEditingProduct(product);
     setModalIsOpen(true);
@@ -291,14 +266,10 @@ const ProductManagement = () => {
 
   const closeModal = () => {
     setFormData({
-      title: "",
+      name: "",
       description: "",
       price: "",
-      location: "",
-      numberOfRooms: "",
-      squareFootage: "",
-      numberOfBeds: "",
-      numberOfBaths: "",
+
       images: [],
       categoryId: "",
     });
@@ -349,17 +320,17 @@ const ProductManagement = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-4">
             <label
-              htmlFor="title"
+              htmlFor="name"
               className="block font-medium mb-1 text-gray-700"
             >
-              Title
+              Name
             </label>
             <input
-              placeholder="Product Title"
+              placeholder="Product Name"
               type="text"
-              name="title"
-              id="title"
-              value={formData.title}
+              name="name"
+              id="name"
+              value={formData.name}
               onChange={handleInputChange}
               className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2 capitalize"
             />
@@ -393,91 +364,6 @@ const ProductManagement = () => {
               name="price"
               id="price"
               value={formData.price}
-              onChange={handleInputChange}
-              className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="location"
-              className="block font-medium mb-1 text-gray-700"
-            >
-              Location
-            </label>
-            <input
-              placeholder="Location"
-              type="text"
-              name="location"
-              id="location"
-              value={formData.location}
-              onChange={handleInputChange}
-              className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2 capitalize"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="numberOfRooms"
-              className="block font-medium mb-1 text-gray-700"
-            >
-              Rooms
-            </label>
-            <input
-              placeholder="Number of Rooms"
-              type="number"
-              name="numberOfRooms"
-              id="numberOfRooms"
-              value={formData.numberOfRooms}
-              onChange={handleInputChange}
-              className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="squareFootage"
-              className="block font-medium mb-1 text-gray-700"
-            >
-              Square Footage / Area
-            </label>
-            <input
-              placeholder="Square Footage / Area"
-              type="number"
-              name="squareFootage"
-              id="squareFootage"
-              value={formData.squareFootage}
-              onChange={handleInputChange}
-              className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="numberOfBaths"
-              className="block font-medium mb-1 text-gray-700"
-            >
-              Baths
-            </label>
-            <input
-              placeholder="Number of Baths"
-              type="number"
-              name="numberOfBaths"
-              id="numberOfBaths"
-              value={formData.numberOfBaths}
-              onChange={handleInputChange}
-              className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="numberOfBeds"
-              className="block font-medium mb-1 text-gray-700"
-            >
-              Beds
-            </label>
-            <input
-              placeholder="Number of Beds"
-              type="number"
-              name="numberOfBeds"
-              id="numberOfBeds"
-              value={formData.numberOfBeds}
               onChange={handleInputChange}
               className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
             />
@@ -543,7 +429,7 @@ const ProductManagement = () => {
           <thead>
             <tr className="bg-teal text-white">
               <th className="px-4 py-2">S/N</th>
-              <th className="px-4 py-2">Title</th>
+              <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Price</th>
               <th className="px-4 py-2">Description</th>
               <th className="px-4 py-2">Category</th>
@@ -556,7 +442,7 @@ const ProductManagement = () => {
                 <td className="border px-4 py-2">
                   {currentPage * ITEMS_PER_PAGE + index + 1}
                 </td>
-                <td className="border px-4 py-2 capitalize">{product.title}</td>
+                <td className="border px-4 py-2 capitalize">{product.name}</td>
                 <td className="border px-4 py-2 text-green font-semibold ">
                   &#x20A6;{product.price?.toLocaleString()}
                 </td>
@@ -636,17 +522,17 @@ const ProductManagement = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="mb-4">
               <label
-                htmlFor="title"
+                htmlFor="name"
                 className="block font-medium mb-1 text-gray-700"
               >
-                Title:
+                Name:
               </label>
               <input
                 placeholder="Product Name"
                 type="text"
-                name="title"
-                id="title"
-                value={formData.title}
+                name="name"
+                id="name"
+                value={formData.name}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
@@ -694,117 +580,6 @@ const ProductManagement = () => {
                   setFormData({
                     ...formData,
                     price: e.target.value,
-                  })
-                }
-                className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="location"
-                className="block font-medium mb-1 text-gray-700"
-              >
-                Location:
-              </label>
-              <input
-                placeholder="Location"
-                type="text"
-                name="location"
-                id="location"
-                value={formData.location}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    location: e.target.value,
-                  })
-                }
-                className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2 capitalize"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="numberOfRooms"
-                className="block font-medium mb-1 text-gray-700"
-              >
-                Rooms:
-              </label>
-              <input
-                placeholder="Number of Rooms"
-                type="number"
-                name="numberOfRooms"
-                id="numberOfRooms"
-                value={formData.numberOfRooms}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    numberOfRooms: e.target.value,
-                  })
-                }
-                className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="squareFootage"
-                className="block font-medium mb-1 text-gray-700"
-              >
-                Square Footage / Area
-              </label>
-              <input
-                placeholder="Square Footage / Area"
-                type="number"
-                name="squareFootage"
-                id="squareFootage"
-                value={formData.squareFootage}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    squareFootage: e.target.value,
-                  })
-                }
-                className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="numberOfBaths"
-                className="block font-medium mb-1 text-gray-700"
-              >
-                Baths
-              </label>
-              <input
-                placeholder="Number of Baths"
-                type="number"
-                name="numberOfBaths"
-                id="numberOfBaths"
-                value={formData.numberOfBaths}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    numberOfBaths: e.target.value,
-                  })
-                }
-                className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="numberOfBeds"
-                className="block font-medium mb-1 text-gray-700"
-              >
-                Beds
-              </label>
-              <input
-                placeholder="Number of Beds"
-                type="number"
-                name="numberOfBeds"
-                id="numberOfBeds"
-                value={formData.numberOfBeds}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    numberOfBeds: e.target.value,
                   })
                 }
                 className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2"

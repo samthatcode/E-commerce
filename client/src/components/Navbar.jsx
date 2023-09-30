@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../contexts/UserContext";
 import { CartContext } from "../contexts/CartContext";
-
+import { FaSearch, FaUser, FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
-import { FaRegBuilding } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
@@ -15,8 +14,8 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "https://surefinders-backend.onrender.com/api/logout",
-        // "/api/logout",
+        // "https://surefinders-backend.onrender.com/api/logout",
+        "/api/logout",
         {},
         {
           withCredentials: true, // Include credentials (cookies)
@@ -36,9 +35,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const [isEventsOpen, setIsEventsOpen] = useState(false);
-  const [isShopOpen, setIsShopOpen] = useState(false);
-
   const handleScrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -51,30 +47,15 @@ const Navbar = () => {
   return (
     <nav className="bg-white text-dark top-0 fixed md:w-full w-full z-10 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[90px]">
+        <div className="flex items-center justify-between h-[70px]">
           <div className="flex items-center">
             <Link
               to="/"
-              className="text-dark hover:text-gray-700 font-bold text-lg flex items-center"
+              className="text-primary hover:text-blue font-bold text-lg flex items-center"
             >
-              {/* <span className="text-primary mr-1 flex justify-center items-center z-10">
-                <FaRegBuilding size={30} />
-              </span> */}
-              <span className="mr-1 flex justify-center items-center z-10">
-                <img
-                  src="https://pbs.twimg.com/profile_images/1604859709210624000/i2dzGLJS_400x400.jpg"
-                  alt="Logo"
-                  className="bg-inherit h-12"
-                />
-              </span>
-              <span className="text-title" style={{ lineHeight: "1" }}>
-                Sure
-                <br />
-                Finders
-              </span>
+              Kalles
             </Link>
-
-            <Cart cartItems={cartItems} />
+            
           </div>
           {/* Desktop View */}
           <div className="hidden md:flex items-baseline justify-center space-x-4 ">
@@ -84,49 +65,22 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <div className="group inline-block">
-              <a smooth="true" className="font-medium">
-                Events
+            <div className="flex">
+              <a
+                smooth="true"
+                className="hover:bg-gray-200 py-2 px-4 rounded-md text-slate-950 font-medium"
+              >
+                About Us
               </a>
-              <div className="hidden group-hover:block absolute bg-gray-500 rounded-md">
-                {/* Dropdown links for Events */}
-                <a
-                  className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                  href="#events"
-                  onClick={() => handleScrollTo("events")}
-                >
-                  Upcoming
-                </a>
-              </div>
             </div>
             <div className="group inline-block">
-              <a href="" smooth="true" className="font-medium">
+              <a
+                href=""
+                smooth="true"
+                className="hover:bg-gray-200 py-2 px-4 rounded-md text-slate-950 font-medium"
+              >
                 Shop
               </a>
-              <div className="hidden group-hover:block absolute bg-gray-500 rounded-md">
-                {/* Dropdown links for Shop */}
-                <a
-                  className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                  href="#lands"
-                  onClick={() => handleScrollTo("lands")}
-                >
-                  Land
-                </a>
-                <a
-                  className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                  href="#homes"
-                  onClick={() => handleScrollTo("homes")}
-                >
-                  Homes
-                </a>
-                <a
-                  className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                  href="#investments"
-                  onClick={() => handleScrollTo("investments")}
-                >
-                  Investment
-                </a>
-              </div>
             </div>
             <a
               href="#contact"
@@ -189,20 +143,22 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
-                >
-                  Login
+              <div className="md:flex items-center space-x-4">
+                <Link to="/login">
+                  <FaUser size={20} className="text-primary hover:text-blue" />
                 </Link>
-                <Link
-                  to="/signup"
-                  className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md ml-4"
-                >
-                  Create Account
-                </Link>
-              </>
+
+                <FaSearch
+                  size={20}
+                  className="text-primary hover:text-blue cursor-pointer"
+                />
+
+                <FaHeart
+                  size={20}
+                  className="text-primary hover:text-blue cursor-pointer"
+                />
+                <Cart cartItems={cartItems} />
+              </div>
             )}
           </div>
         </div>
@@ -217,57 +173,19 @@ const Navbar = () => {
             Home
           </Link>
           <a
-            onClick={() => setIsEventsOpen(!isEventsOpen)}
             smooth="true"
             className="block px-3 py-2 rounded-md  font-medium hover:bg-gray-200 text-slate-950"
           >
-            Events
+            About Us
           </a>
-          {isEventsOpen && (
-            <div className="px-4 py-2 bg-gray-500 rounded-md">
-              {/* Dropdown links for Events */}
-              <a
-                className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                href="#events"
-                onClick={() => handleScrollTo("events")}
-              >
-                Upcoming
-              </a>
-            </div>
-          )}
+
           <a
-            onClick={() => setIsShopOpen(!isShopOpen)}
             smooth="true"
             className="block px-3 py-2 rounded-md  font-medium hover:bg-gray-200 text-slate-950"
           >
             Shop
           </a>
-          {isShopOpen && (
-            <div className="px-4 py-2 bg-gray-500 rounded-md">
-              {/* Dropdown links for Shop */}
-              <a
-                className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                href="#lands"
-                onClick={() => handleScrollTo("lands")}
-              >
-                Land
-              </a>
-              <a
-                className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                href="#homes"
-                onClick={() => handleScrollTo("homes")}
-              >
-                Homes
-              </a>
-              <a
-                className="block text-white hover:bg-gray-600 p-2 rounded-md"
-                href="#investments"
-                onClick={() => handleScrollTo("investments")}
-              >
-                Investments
-              </a>
-            </div>
-          )}
+
           <a
             href="#contact"
             onClick={() => handleScrollTo("contact")}
@@ -298,13 +216,6 @@ const Navbar = () => {
                 target="_self"
               >
                 Login
-              </a>
-              <a
-                className="block px-3 py-2 rounded-md font-medium bg-primary hover:bg-blue text-white text-center"
-                href="/signup"
-                target="_self"
-              >
-                Create Account
               </a>
             </>
           )}

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-             
+
 const ProductSchema = new Schema({
-    
-    title: { 
+    name: {
         type: String,
         required: true
-    },    
+    },
     description: {
         type: String,
         required: true,
@@ -15,36 +14,16 @@ const ProductSchema = new Schema({
         type: Number,
         required: true,
         min: 0
-    },
-    location: {
-        type: String,
-        required: true,
-    },
-    numberOfRooms: {
-        type: Number,
-        required: true,
-    },   
-    numberOfBeds: {
-        type: Number,
-        required: true,
-    },
-    numberOfBaths: {
-        type: Number,
-        required: true,
-    },
-    squareFootage: {
-        type: Number,
-        required: true,
-    },
+    },  
     images: {
         type: [String], // Array of image URLs
         required: true,
-    },       
+    },
     categoryId: {
         type: Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'Category', // Reference to the category model
         required: true
-    },    
+    },
     createdAt: {
         type: Date,
         default: new Date(),

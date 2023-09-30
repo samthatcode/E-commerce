@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import MessageModal from "./Marketer/MessageModal";
+import MessageModal from "./MessageModal";
 import { FaSpinner } from "react-icons/fa";
 
 const ForgotPassword = () => {

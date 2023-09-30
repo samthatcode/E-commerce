@@ -22,30 +22,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Your last name is required"],
   },
-  phoneNumber: {
-    type: Number,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  },
-  stateProvince: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  profession: {
-    type: String,
-    required: true
-  },
-  discoverySource: {
-    type: String,
-    required: true
-  },
+  
   profilePicture: {
     type: String,
     default: "", // default value can be a URL to a default profile picture
@@ -54,14 +31,6 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true,
   },
-  purchases: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Purchase'
-  }],
-  investments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Investment'
-  }],
   createdAt: {
     type: Date,
     default: new Date(),
@@ -78,9 +47,7 @@ const UserSchema = new Schema({
   token: {
     type: String
   },
-  referral_id: {
-    type: String
-  }
+ 
 });
 
 UserSchema.pre("save", async function (next) {
