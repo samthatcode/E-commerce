@@ -56,7 +56,7 @@ const ProductManagement = () => {
     try {
       const response = await axios.get(
         "/api/products",
-        // "https://surefinders-backend.onrender.com/api/products",
+        // "https://kalles-backend.onrender.com/api/products",
         { withCredentials: true }
       );
       setProducts(response.data.data);
@@ -71,7 +71,7 @@ const ProductManagement = () => {
       try {
         const response = await axios.get(
           "/api/categories",
-          // "https://surefinders-backend.onrender.com/api/categories",
+          // "https://kalles-backend.onrender.com/api/categories",
           { withCredentials: true }
         );
         setCategories(response.data.data);
@@ -151,7 +151,7 @@ const ProductManagement = () => {
 
       const response = await axios.post(
         "/api/products",
-        // "https://surefinders-backend.onrender.com/api/products",
+        // "https://kalles-backend.onrender.com/api/products",
         formDataToSend,
         { withCredentials: true }
       );
@@ -164,7 +164,6 @@ const ProductManagement = () => {
         name: "",
         description: "",
         price: "",
-
         images: [],
         categoryId: "",
       });
@@ -202,7 +201,7 @@ const ProductManagement = () => {
       // Send the formData with the PUT request
       await axios.put(
         `/api/products/${id}`,
-        // `https://surefinders-backend.onrender.com/api/products/${id}`,
+        // `https://kalles-backend.onrender.com/api/products/${id}`,
         formData,
         { withCredentials: true }
       );
@@ -215,7 +214,6 @@ const ProductManagement = () => {
         name: "",
         description: "",
         price: "",
-
         images: [],
         categoryId: "",
       });
@@ -230,7 +228,7 @@ const ProductManagement = () => {
       try {
         await axios.delete(
           `/api/products/${id}`,
-          // `https://surefinders-backend.onrender.com/api/products/${id}`,
+          // `https://kalles-backend.onrender.com/api/products/${id}`,
           { withCredentials: true }
         );
         fetchProducts();
@@ -248,7 +246,6 @@ const ProductManagement = () => {
       name,
       description,
       price,
-
       categoryId,
     } = product;
     // Create a new object with the extracted properties and set it as the form data
@@ -256,7 +253,6 @@ const ProductManagement = () => {
       name,
       description,
       price,
-
       categoryId,
       images: [],
     });

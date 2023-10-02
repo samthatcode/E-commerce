@@ -26,7 +26,7 @@ const ForgotPassword = () => {
     try {
       const { data } = await axios.post(
         // "/api/forgot-password",
-        "https://surefinders-backend.onrender.com/api/forgot-password",
+        "https://kalles-backend.onrender.com/api/forgot-password",
         { email },
         { withCredentials: true }
       );

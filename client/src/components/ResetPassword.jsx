@@ -19,7 +19,7 @@ const ResetPassword = () => {
       // Call your API to handle password reset
       const response = await axios.post(
         // `/api/reset/${resetToken}`,
-        `https://surefinders-backend.onrender.com/api/reset/${resetToken}`,
+        `https://kalles-backend.onrender.com/api/reset/${resetToken}`,
         {
           newPassword: password,
         },

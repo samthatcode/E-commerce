@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        // "https://surefinders-backend.onrender.com/api/logout",
+        // "https://kalles-backend.onrender.com/api/logout",
         "/api/logout",
         {},
         {

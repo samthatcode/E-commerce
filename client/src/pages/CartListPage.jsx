@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import ProductPage from "./ProductPage";
 import Layout from "../components/Layout";
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { FaBath, FaBed, FaDoorOpen, FaRuler } from "react-icons/fa";
 import { UserContext } from "../contexts/UserContext";
 import { FaSpinner } from "react-icons/fa";
 
@@ -52,13 +50,7 @@ const CartListPage = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cartItems.map((item) => {
-            const { id, title, description, price, location, images, type } =
-              item;
-
-            const numberOfBaths = item.numberOfBaths || null;
-            const numberOfBeds = item.numberOfBeds || null;
-            const numberOfRooms = item.numberOfRooms || null;
-            const squareFootage = item.squareFootage || null;
+            const { id, name, description, price, images, type } = item;
 
             return (
               <div key={id} className="border p-3 w-full">
@@ -66,69 +58,24 @@ const CartListPage = () => {
                   <div className="">
                     {images.length > 0 && (
                       <img
-                        src={`https://surefinders-backend.onrender.com/public/images/${item.images[0]}`}
-                        // src={`http://localhost:5175/public/images/${item.images[0]}`}
-                        alt={item.title}
+                        // src={`https://kalles-backend.onrender.com/public/images/${item.images[0]}`}
+                        src={`http://localhost:5175/public/images/${item.images[0]}`}
+                        alt={item.name}
                         className="w-full max-h-60 object-cover image"
                       />
                     )}
                     <div className="flex justify-between items-center my-4">
                       <div className="">
                         <span className="text-sm font-medium capitalize text-indigo-500 bg-indigo-100 p-1 py-1 px-2 last:mr-0 mr-1 mb-4">
-                          {title}
+                          {name}
                         </span>
                         <p className="text-title text-lg capitalize break-words font-bold my-2">
-                          {description.length > 15
-                            ? `${description.substring(0, 15)}...`
-                            : description}
+                          {description}
                         </p>
-                        <p className="text-[14px] text-slate-500 capitalize flex justify-start items-center mb-4">
-                          <AiOutlineEnvironment className="text-gray-400 mr-1" />
-                          {location}
-                        </p>
-                        <div className="flex">
-                          <div className="flex flex-row gap-4 text-sm text-zinc-500 mr-4">
-                            <div className="flex-col">
-                              <p>Baths</p>
-                              <div className="flex justify-center items-center">
-                                <span className="mr-1">
-                                  <FaBath />
-                                </span>
-                                <p>{numberOfBaths}</p>
-                              </div>
-                            </div>
-                            <div className="flex-col">
-                              <p>Beds</p>
-                              <div className="flex justify-center items-center">
-                                <span className="mr-1">
-                                  <FaBed />
-                                </span>
-                                <p>{numberOfBeds}</p>
-                              </div>
-                            </div>
-                            <div className="flex-col">
-                              <p>Rooms</p>
-                              <div className="flex justify-center items-center">
-                                <span className="mr-1">
-                                  <FaDoorOpen />
-                                </span>
-                                <p>{numberOfRooms}</p>
-                              </div>
-                            </div>
-                            <div className="flex-col">
-                              <p>Area</p>
-                              <div className="flex justify-center items-center">
-                                <span className="mr-1">
-                                  <FaRuler />
-                                </span>
-                                <p>{squareFootage} Sq Ft</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+
                         <div className="flex justify-between items-center">
-                          <p className="text-lg text-title font-bold border-t my-2">
-                            &#x20A6;{price}
+                          <p className="text-lg text-red font-bold border-t my-2">
+                            &#x20A6;{price?.toLocaleString()}
                           </p>
                         </div>
                       </div>
@@ -194,7 +141,10 @@ const CartListPage = () => {
         {cartItems.length > 0 && (
           <div className="mt-8">
             <h3 className="text-xl font-bold">
-              Total Price: &#x20A6;{totalPrice}{" "}
+              Total Price:{" "}
+              <span className="text-seagreen">
+                &#x20A6;{totalPrice?.toLocaleString()}
+              </span>{" "}
               {/* Use totalPrice from the context */}
             </h3>
 

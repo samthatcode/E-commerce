@@ -4,7 +4,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
 body {
   background: #fff;
   margin: 0;
@@ -12,11 +11,6 @@ body {
   height: 100%;
   font-family:  "Poppins", sans-serif;
   box-sizing: border-box;
-}
-
-.content {
-  /* padding-top: 70px; */
-  /* Adjust the padding-top value as needed to avoid overlap with the Navbar */
 }
 
 .active {

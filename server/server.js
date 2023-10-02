@@ -95,7 +95,7 @@ mongoose.connect(MONGODB_URI, {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    // origin: ["https://surefinders-frontend.onrender.com"],
+    // origin: ["https://kalles-frontend.onrender.com", "https://kalles-backed.onrender.com"],
     origin: ["http://localhost:5175", "http://localhost:5174"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,

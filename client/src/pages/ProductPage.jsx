@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { FaBath, FaBed, FaDoorOpen, FaRuler, FaSpinner } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -69,14 +68,14 @@ const ProductPage = () => {
   const navigate = useNavigate();
 
   const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const response = await axios.get(
-          // "https://surefinders-backend.onrender.com/api/products",
+          // "https://kalles-backend.onrender.com/api/products",
           "/api/products",
           {
             withCredentials: true,
@@ -144,7 +143,7 @@ const ProductPage = () => {
           filteredProducts.map((product) => (
             <div key={product._id} className="slick-slide">
               <div
-                className="relative rounded overflow-hidden hover:shadow-xl transition-all hover-card cursor-pointer"
+                className="relative rounded overflow-hidden shadow-xl transition-all hover-card cursor-pointer"
                 onClick={() => {
                   // Check if the click target is not the heart icon
                   if (!event.target.classList.contains("heart-icon")) {
@@ -155,7 +154,7 @@ const ProductPage = () => {
                 <div className="image-container">
                   {product.images.length > 0 && (
                     <img
-                      // src={`https://surefinders-backend.onrender.com/public/images/${product.images[0]}`}
+                      // src={`https://kalles-backend.onrender.com/public/images/${product.images[0]}`}
                       src={`http://localhost:5175/public/images/${product.images[0]}`}
                       alt={product.name}
                       className="w-full max-h-60 object-cover image"
@@ -182,8 +181,8 @@ const ProductPage = () => {
                     {product.name}
                   </span>
                   <p className="text-title text-lg capitalize break-words font-bold my-2">
-                    {product.description.length > 15
-                      ? `${product.description.substring(0, 15)}...`
+                    {product.description.length > 30
+                      ? `${product.description.substring(0, 30)}...`
                       : product.description}
                   </p>
                   <div className="flex justify-between items-center">

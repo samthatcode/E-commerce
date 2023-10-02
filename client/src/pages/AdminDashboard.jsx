@@ -31,8 +31,8 @@ const AdminDashboard = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "https://surefinders-backend.onrender.com/api/logout",
-        // "/api/logout",
+        // "https://kalles-backend.onrender.com/api/logout",
+        "/api/logout",
         {},
         {
           withCredentials: true, // Include credentials (cookies)
@@ -52,8 +52,8 @@ const AdminDashboard = () => {
     const fetchProducts = async () => {
       try {
         const productsResponse = await fetch(
-          "https://surefinders-backend.onrender.com/api/products",
-          // "/api/products",
+          // "https://kalles-backend.onrender.com/api/products",
+          "/api/products",
           { withCredentials: true }
         );
         const productsData = await productsResponse.json();
@@ -68,8 +68,8 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
       try {
         const usersResponse = await fetch(
-          "https://surefinders-backend.onrender.com/api/users",
-          // "/api/users",
+          // "https://kalles-backend.onrender.com/api/users",
+          "/api/users",
           { withCredentials: true }
         );
         const usersData = await usersResponse.json();

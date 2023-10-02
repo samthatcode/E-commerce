@@ -33,8 +33,8 @@ const ContactUs = () => {
 
     try {
       await axios.post(
-        "https://surefinders-backend.onrender.com/api/contact",
-        // "/api/contact",
+        // "https://kalles-backend.onrender.com/api/contact",
+        "/api/contact",
         formData
       );
 
@@ -117,21 +117,21 @@ const ContactUs = () => {
               Social Media
             </h2>
             <a
-              href="https://twitter.com/surefinders"
+              href="https://twitter.com"
               className="text-blue block mb-2"
             >
               <AiFillTwitterCircle className="inline mr-2" />
               Twitter
             </a>
             <a
-              href="https://web.facebook.com/surefinders"
+              href="https://web.facebook.com"
               className="text-primary block mb-2"
             >
               <AiFillFacebook className="inline mr-2" />
               Facebook
             </a>
             <a
-              href="https://www.instagram.com/surefinders"
+              href="https://www.instagram.com"
               className="text-pink-600"
             >
               <AiFillInstagram className="inline mr-2" />

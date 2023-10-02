@@ -49,7 +49,7 @@ const Signup = () => {
       await axios({
         method: "POST",
         url: "/api/signup",
-        // url: "https://surefinders-backend.onrender.com/api/signup",
+        // url: "https://kalles-backend.onrender.com/api/signup",
         data: {
           email,
           password,

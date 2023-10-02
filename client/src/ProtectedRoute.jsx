@@ -6,7 +6,7 @@ const ProtectedRoute = ({ roles, children }) => {
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
-  const isAuthenticated = user || marketer;
+  const isAuthenticated = user;
   const role = user ? user.role : null;
 
   // console.log("Is authenticated:", isAuthenticated);

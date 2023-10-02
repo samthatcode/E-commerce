@@ -12,8 +12,7 @@ const CategoryManagement = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [newCategory, setNewCategory] = useState({
     name: "",
-    description: "",
-    // add other category details here
+    description: "",    
   });
 
   useEffect(() => {
@@ -33,10 +32,11 @@ const CategoryManagement = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        // "https://surefinders-backend.onrender.com/api/categories",
+        // "https://kalles-backend.onrender.com/api/categories",
         "api/categories",
-        
-        { withCredentials: true });
+
+        { withCredentials: true }
+      );
       setCategories(response.data.data);
     } catch (error) {
       console.error(error);
@@ -48,9 +48,11 @@ const CategoryManagement = () => {
     setIsCreatingCategory(true);
     try {
       const response = await axios.post(
-        // "https://surefinders-backend.onrender.com/api/categories", 
-        "api/categories",
-        newCategory,{ withCredentials: true });
+        // "https://kalles-backend.onrender.com/api/categories",
+        "/api/categories",
+        newCategory,
+        { withCredentials: true }
+      );
       const createdCategory = response.data.data;
       toast.success("Category created successfully");
       setCategories([...categories, createdCategory]);
@@ -75,10 +77,12 @@ const CategoryManagement = () => {
     }
     try {
       await axios.put(
-        // `https://surefinders-backend.onrender.com/api/categories/${id}`, 
+        // `https://kalles-backend.onrender.com/api/categories/${id}`,
         `api/categories/${id}`,
-      
-      updatedCategory, { withCredentials: true });
+
+        updatedCategory,
+        { withCredentials: true }
+      );
       fetchCategories();
       toast.success("Category updated successfully");
       setIsFormSubmitted(true);
@@ -90,7 +94,7 @@ const CategoryManagement = () => {
 
   const openModal = (category) => {
     setEditingCategory(category);
-    setNewCategory({ ...category });
+    // setNewCategory(category);
     setIsModalOpen(true);
   };
 
@@ -98,9 +102,10 @@ const CategoryManagement = () => {
     if (window.confirm("Are you sure you want to delete this category?")) {
       try {
         await axios.delete(
-          // `https://surefinders-backend.onrender.com/api/categories/${id}`, 
+          // `https://kalles-backend.onrender.com/api/categories/${id}`,
           `api/categories/${id}`,
-        { withCredentials: true });
+          { withCredentials: true }
+        );
         fetchCategories();
         toast.success("Category deleted successfully");
       } catch (error) {
@@ -121,24 +126,46 @@ const CategoryManagement = () => {
               createCategory();
             }}
           >
-            <input
-              type="text"
-              placeholder="Category Name"
-              value={newCategory.name}
-              onChange={(e) =>
-                setNewCategory({ ...newCategory, name: e.target.value })
-              }
-              className="border p-2 rounded mr-2 capitalize"
-            />
-            <input
-              type="text"
-              placeholder="Category Description"
-              value={newCategory.description}
-              onChange={(e) =>
-                setNewCategory({ ...newCategory, description: e.target.value })
-              }
-              className="border p-2 rounded mr-2 capitalize"
-            />
+            <div className="mb-4">
+              <label
+                htmlFor="categoryId"
+                className="block font-medium mb-1 text-gray-700"
+              >
+                Category
+              </label>
+              <input
+                type="text"
+                placeholder="Category Name"
+                value={newCategory.name}
+                onChange={(e) =>
+                  setNewCategory({ ...newCategory, name: e.target.value })
+                }
+                className="border p-2 rounded mr-2 capitalize"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="description"
+                className="block font-medium mb-1 text-gray-700"
+              >
+                Description
+              </label>
+              <textarea
+                name="description"
+                id="description"
+                type="text"
+                placeholder="Category Description"
+                value={newCategory.description}
+                onChange={(e) =>
+                  setNewCategory({
+                    ...newCategory,
+                    description: e.target.value,
+                  })
+                }
+                className="w-full border-gray-300 rounded-md sm:text-sm px-3 py-2 capitalize"
+              ></textarea>
+            </div>
+
             <button
               type="submit"
               disabled={isCreatingCategory}
@@ -236,7 +263,7 @@ const CategoryManagement = () => {
                     />
                     <button
                       type="submit"
-                      className="p-2 bg-blue-500 text-white rounded mt-2"
+                      className="p-2 bg-blue text-white rounded mt-2"
                     >
                       Update Category
                     </button>
