@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../contexts/UserContext";
 import { CartContext } from "../contexts/CartContext";
+import { useSavedProperties } from "../contexts/SavedPropertiesContext";
 import { FaSearch, FaUser, FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Cart from "./Cart";
@@ -10,6 +11,9 @@ const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const { cartItems, clearCart } = useContext(CartContext);
+
+  const { savedProperties } = useSavedProperties();
+  const savedItemsCount = savedProperties.length;
 
   const handleLogout = async () => {
     try {
@@ -55,7 +59,6 @@ const Navbar = () => {
             >
               Kalles
             </Link>
-            
           </div>
           {/* Desktop View */}
           <div className="hidden md:flex items-baseline justify-center space-x-4 ">
@@ -145,18 +148,25 @@ const Navbar = () => {
             ) : (
               <div className="md:flex items-center space-x-4">
                 <Link to="/login">
-                  <FaUser size={20} className="text-primary hover:text-blue" />
+                  <FaUser size={25} className="text-primary hover:text-blue" />
                 </Link>
 
                 <FaSearch
-                  size={20}
+                  size={25}
                   className="text-primary hover:text-blue cursor-pointer"
                 />
 
-                <FaHeart
-                  size={20}
-                  className="text-primary hover:text-blue cursor-pointer"
-                />
+                <div className="flex items-center ml-4 relative">
+                  <Link to="/products/saved">
+                    <FaHeart
+                      size={25}
+                      className="text-primary hover:text-blue cursor-pointer"
+                    />
+                    <span className="absolute -top-3 -right-2 px-1 text-xs font-semibold bg-red text-white rounded-full w-4 h-4 text-center flex items-center justify-center">
+                      {savedItemsCount}
+                    </span>
+                  </Link>
+                </div>
                 <Cart cartItems={cartItems} />
               </div>
             )}

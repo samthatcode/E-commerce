@@ -149,7 +149,7 @@ const CartListPage = () => {
             </h3>
 
             <button
-              className="mt-4 px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+              className="mt-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-700"
               onClick={clearCart}
             >
               Clear Cart

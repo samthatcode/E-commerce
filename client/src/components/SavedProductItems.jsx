@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaHeart, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useSavedProperties } from "../contexts/SavedPropertiesContext";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { FaBath, FaBed, FaDoorOpen, FaRuler } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";

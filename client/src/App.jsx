@@ -19,6 +19,7 @@ import {
   UserEmailVerification,
   ForgotPassword,
   ResetPassword,
+  SavedProductItems,
 } from "./components";
 import { UserProvider } from "./contexts/UserContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -50,6 +51,7 @@ const App = () => {
                   <Route path="/products" element={<ProductPage />} />
 
                   <Route path="/products/:id" element={<ProductDetails />} />
+                  <Route path="/products/saved" element={<SavedProductItems />} />
 
                   <Route path="/user/dashboard" element={<UserDashboard />} />
 

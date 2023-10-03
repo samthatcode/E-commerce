@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "../contexts/CartContext";
 import { toast } from "react-toastify";
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { FaBath, FaBed, FaDoorOpen, FaRuler } from "react-icons/fa";
 import { Layout } from "../components";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -80,13 +78,13 @@ const ProductDetails = () => {
       <div className="container mx-auto p-10 py-40">
         <div className="title_head mb-4">
           <h2 className="md:text-2xl text-xl font-bold text-center text-title capitalize">
-            Recent Property Details
+            Products Details
           </h2>
           <p class="text-center capitalize text-subTitle">
             We provide full service at every step.
           </p>
         </div>
-        <div className="flex justify-between items-center mx-auto bg-slate-100 rounded-lg shadow-xl p-8">
+        <div className="flex justify-between items-center gap-5 mx-auto bg-slate-100 rounded-lg shadow-xl p-8">
           <div className="max-w-xl">
             <div className="flex justify-center relative border p-5">
               {currentImage && (
@@ -108,7 +106,7 @@ const ProductDetails = () => {
                 size={30}
               />
             </div>
-            <div className="grid grid-cols-4 gap-4 my-4">
+            <div className="grid grid-cols-4 gap-4 my-4 border p-4">
               {product &&
                 product.images &&
                 product.images.map((thumbnail, index) => (

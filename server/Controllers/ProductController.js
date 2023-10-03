@@ -78,9 +78,10 @@ module.exports.getProducts = async (req, res, next) => {
     try {
         const productIds = req.query.ids ? req.query.ids.split(',') : [];
         const products = productIds.length
-            ? await Product.find({ '_id': { $in: productIds } })
-            : await Product.find();
+            ? await Product.find({ '_id': { $in: productIds } }).populate('categoryId')
+            : await Product.find().populate('categoryId');
 
+        
         res.status(200).json({
             data: products,
         });
@@ -89,6 +90,7 @@ module.exports.getProducts = async (req, res, next) => {
         next(error);
     }
 };
+
 
 
 // Get a single product by ID

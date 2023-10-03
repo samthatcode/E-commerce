@@ -12,15 +12,15 @@ const Cart = () => {
   return (
     <div className="flex items-center ml-4 relative">
       <FaShoppingBasket
+        size={25}
         onClick={() => navigate("/cart")}
-        className="text-2xl cursor-pointer text-gray-400"
+        className="cursor-pointer text-primary"
       />
-      {cartItemsCount > 0 && (
-       <span className="absolute -top-2 -right-2 px-1 text-xs font-semibold bg-red text-white rounded-full w-5 h-5 text-center flex items-center justify-center">
-       {cartItemsCount}
-     </span>
+      
+        <span className="absolute -top-3 -right-1 px-1 text-xs font-semibold bg-red text-white rounded-full w-4 h-4 text-center flex items-center justify-center">
+          {cartItemsCount}
+        </span>
      
-      )}
     </div>
   );
 };
