@@ -10,7 +10,7 @@ const Home = () => {
     <div> 
       <Layout>
         <Hero />
-        <ProductPage />        
+        {/* <ProductPage />         */}
         <ContactUs />     
       </Layout>  
     </div>
