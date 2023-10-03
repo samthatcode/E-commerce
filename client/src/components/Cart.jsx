@@ -16,11 +16,10 @@ const Cart = () => {
         onClick={() => navigate("/cart")}
         className="cursor-pointer text-primary"
       />
-      
-        <span className="absolute -top-3 -right-1 px-1 text-xs font-semibold bg-red text-white rounded-full w-4 h-4 text-center flex items-center justify-center">
-          {cartItemsCount}
-        </span>
-     
+
+      <span className="absolute -top-3 -right-1 px-1 text-xs font-semibold bg-red text-white rounded-full w-4 h-4 text-center flex items-center justify-center">
+        {cartItemsCount}
+      </span>
     </div>
   );
 };

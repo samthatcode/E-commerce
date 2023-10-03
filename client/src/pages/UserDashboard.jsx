@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ProductPage from "./ProductPage";
 
-import { SavedProductItems } from "../components";
+import { Navbar, SavedProductItems } from "../components";
 
 const UserDashboard = () => {
   const { user, setUser } = useContext(UserContext);
@@ -40,89 +40,92 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="">
-      <header className="col-span-12 flex justify-between items-center p-4 bg-primary text-white w-full top-0 fixed z-10 shadow-xl ">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+    <>
+    <Navbar />
+      <div className="">
+        <header className="col-span-12 flex justify-between items-center p-4 bg-primary text-white w-full top-0 fixed z-10 shadow-xl my-20">
+          <h1 className="text-2xl font-bold">Dashboard</h1>
 
-        {user && (
-          <>
-            <span className="text-indigo-500 bg-indigo-100 rounded-lg p-1 text-xs font-semibold py-1 px-2 last:mr-0 mr-1">
-              {user.email}
+          {user && (
+            <>
+              <span className="text-indigo-500 bg-indigo-100 rounded-lg p-1 text-xs font-semibold py-1 px-2 last:mr-0 mr-1">
+                {user.email}
+              </span>
+              <div className="flex justify-start items-center gap-4">
+                <button
+                  onClick={handleChangePassword}
+                  className="inline-block font-medium bg-white hover:text-blue text-primary py-2 px-4 rounded-md"
+                >
+                  Change Password
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="inline-block font-medium bg-white hover:text-blue text-primary py-2 px-4 rounded-md"
+                >
+                  Logout
+                </button>
+              </div>
+            </>
+          )}
+        </header>
+
+        <div className=" p-4 bg-white rounded shadow mt-40">
+          <p className="mb-4 capitalize">
+            Welcome,{" "}
+            <span className="text-indigo-500 bg-indigo-100 rounded-lg p-1 text-base font-semibold py-1 px-2 last:mr-0 mr-1">
+              {user && `${user.firstName} ${user.lastName}`}!
             </span>
-            <div className="flex justify-start items-center gap-4">
-              <button
-                onClick={handleChangePassword}
-                className="inline-block font-medium bg-white hover:text-blue text-primary py-2 px-4 rounded-md"
-              >
-                Change Password
-              </button>
-              <button
-                onClick={handleLogout}
-                className="inline-block font-medium bg-white hover:text-blue text-primary py-2 px-4 rounded-md"
-              >
-                Logout
-              </button>
-            </div>
-          </>
-        )}
-      </header>
-
-      <div className=" p-4 bg-white rounded shadow mt-20">
-        <p className="mb-4 capitalize">
-          Welcome,{" "}
-          <span className="text-indigo-500 bg-indigo-100 rounded-lg p-1 text-base font-semibold py-1 px-2 last:mr-0 mr-1">
-            {user && `${user.firstName} ${user.lastName}`}!
-          </span>
-        </p>
-        <h2 className="text-2xl text-center bg-blue hover:bg-primary p-5 text-white font-bold mb-2">
-          Wishlists
-        </h2>
-        <div className=" p-4 bg-white rounded-xl shadow-xl mt-20">
-          <SavedProductItems />
+          </p>
+          <h2 className="text-2xl text-center bg-blue hover:bg-primary p-5 text-white font-bold mb-2">
+            Wishlists
+          </h2>
+          <div className=" p-4 bg-white rounded-xl shadow-xl mt-20">
+            <SavedProductItems />
+          </div>
         </div>
-      </div>
 
-      <div className="mt-4 p-4 bg-white rounded shadow">
-        <h2 className="text-xl font-bold mb-2">Account Settings</h2>
-        {user && (
-          <>
-            <span className="text-indigo-500 bg-indigo-100 rounded-lg p-1 text-xs font-semibold py-1 px-2 last:mr-0 mr-1">
-              {user.email}
-            </span>
-            <div className="flex justify-start items-center gap-4 my-4">
-              {/* <button
+        <div className="mt-4 p-4 bg-white rounded shadow">
+          <h2 className="text-xl font-bold mb-2">Account Settings</h2>
+          {user && (
+            <>
+              <span className="text-indigo-500 bg-indigo-100 rounded-lg p-1 text-xs font-semibold py-1 px-2 last:mr-0 mr-1">
+                {user.email}
+              </span>
+              <div className="flex justify-start items-center gap-4 my-4">
+                {/* <button
                 onClick={handleUpdateProfile}
                 className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
               >
                 Update Profile
               </button> */}
-              <button
-                onClick={handleChangePassword}
-                className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
-              >
-                Change Password
-              </button>
-              <button
-                onClick={handleLogout}
-                className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
-              >
-                Logout
-              </button>
+                <button
+                  onClick={handleChangePassword}
+                  className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
+                >
+                  Change Password
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
+                >
+                  Logout
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+        {user && (
+          <>
+            <div className="mt-4 p-4 bg-white rounded shadow">
+              <h2 className="text-2xl text-center bg-blue hover:bg-primary p-5 text-white font-bold mb-2">
+                Your Listings
+              </h2>
+              <ProductPage />
             </div>
           </>
         )}
       </div>
-      {user && (
-        <>
-          <div className="mt-4 p-4 bg-white rounded shadow">
-            <h2 className="text-2xl text-center bg-blue hover:bg-primary p-5 text-white font-bold mb-2">
-              Your Listings
-            </h2>
-            <ProductPage />
-          </div>
-        </>
-      )}
-    </div>
+    </>
   );
 };
 

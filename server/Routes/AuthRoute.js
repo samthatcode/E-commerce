@@ -31,7 +31,7 @@ router.get('/users', getUsers);
 
 router.put('/users/:userId', grantAccess('updateAny', 'profile'), updateUser);
 
-router.delete('/users/:userId', grantAccess('deleteAny', 'profile'), deleteUser);
+router.delete('/users/:userId', deleteUser);
 
 // router.put('/user/:userId/profile', verifyTokenAndUser, allowIfLoggedin, grantAccess('updateOwn', 'profile'), updateUser);
 

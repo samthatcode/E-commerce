@@ -58,8 +58,8 @@ const CartListPage = () => {
                   <div className="">
                     {images.length > 0 && (
                       <img
-                        // src={`https://kalles-backend.onrender.com/public/images/${item.images[0]}`}
-                        src={`http://localhost:5175/public/images/${item.images[0]}`}
+                        src={`https://kalles-backend.onrender.com/public/images/${item.images[0]}`}
+                        // src={`http://localhost:5175/public/images/${item.images[0]}`}
                         alt={item.name}
                         className="w-full max-h-60 object-cover image"
                       />

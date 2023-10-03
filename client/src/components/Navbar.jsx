@@ -18,8 +18,8 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        // "https://kalles-backend.onrender.com/api/logout",
-        "/api/logout",
+        "https://kalles-backend.onrender.com/api/logout",
+        // "/api/logout",
         {},
         {
           withCredentials: true, // Include credentials (cookies)
@@ -135,41 +135,29 @@ const Navbar = () => {
             </button>
           </div>
           <div className="hidden md:block">
-            {user ? (
-              <>
-                <span className="pr-4">{user.email}</span>
-                <button
-                  onClick={handleLogout}
-                  className="inline-block font-medium bg-primary hover:bg-blue text-white py-2 px-4 rounded-md"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <div className="md:flex items-center space-x-4">
-                <Link to="/login">
-                  <FaUser size={25} className="text-primary hover:text-blue" />
+            <div className="md:flex items-center space-x-4">
+              <Link to="/login">
+                <FaUser size={25} className="text-primary hover:text-blue" />
+              </Link>
+
+              <FaSearch
+                size={25}
+                className="text-primary hover:text-blue cursor-pointer"
+              />
+
+              <div className="flex items-center ml-4 relative">
+                <Link to="/products/saved">
+                  <FaHeart
+                    size={25}
+                    className="text-primary hover:text-blue cursor-pointer"
+                  />
+                  <span className="absolute -top-3 -right-2 px-1 text-xs font-semibold bg-red text-white rounded-full w-4 h-4 text-center flex items-center justify-center">
+                    {savedItemsCount}
+                  </span>
                 </Link>
-
-                <FaSearch
-                  size={25}
-                  className="text-primary hover:text-blue cursor-pointer"
-                />
-
-                <div className="flex items-center ml-4 relative">
-                  <Link to="/products/saved">
-                    <FaHeart
-                      size={25}
-                      className="text-primary hover:text-blue cursor-pointer"
-                    />
-                    <span className="absolute -top-3 -right-2 px-1 text-xs font-semibold bg-red text-white rounded-full w-4 h-4 text-center flex items-center justify-center">
-                      {savedItemsCount}
-                    </span>
-                  </Link>
-                </div>
-                <Cart cartItems={cartItems} />
               </div>
-            )}
+              <Cart cartItems={cartItems} />
+            </div>
           </div>
         </div>
       </div>

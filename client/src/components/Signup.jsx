@@ -48,8 +48,8 @@ const Signup = () => {
     try {
       await axios({
         method: "POST",
-        url: "/api/signup",
-        // url: "https://kalles-backend.onrender.com/api/signup",
+        // url: "/api/signup",
+        url: "https://kalles-backend.onrender.com/api/signup",
         data: {
           email,
           password,

@@ -23,7 +23,6 @@ const ProductManagement = () => {
     name: "",
     description: "",
     price: "",
-
     images: [],
     categoryId: "",
   });
@@ -43,7 +42,6 @@ const ProductManagement = () => {
         name: "",
         description: "",
         price: "",
-
         images: [],
         categoryId: "",
       });
@@ -55,8 +53,8 @@ const ProductManagement = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "/api/products",
-        // "https://kalles-backend.onrender.com/api/products",
+        // "/api/products",
+        "https://kalles-backend.onrender.com/api/products",
         { withCredentials: true }
       );
       setProducts(response.data.data);
@@ -70,8 +68,8 @@ const ProductManagement = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "/api/categories",
-          // "https://kalles-backend.onrender.com/api/categories",
+          // "/api/categories",
+          "https://kalles-backend.onrender.com/api/categories",
           { withCredentials: true }
         );
         setCategories(response.data.data);
@@ -93,6 +91,7 @@ const ProductManagement = () => {
 
   // Handle input changes
   const handleInputChange = (e) => {
+    // console.log("Input name:", e.target.name);
     // Inside handleInputChange function
     if (e.target.name === "image" || e.target.name === "images") {
       const selectedFiles = Array.from(e.target.files);
@@ -145,13 +144,13 @@ const ProductManagement = () => {
 
       // console.log("image after loop:", formDataToSend.getAll("images"));
       // Make the API request to send the form data to the server
-      for (let pair of formDataToSend.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
+      // for (let pair of formDataToSend.entries()) {
+      //   console.log(pair[0] + ", " + pair[1]);
+      // }
 
       const response = await axios.post(
-        "/api/products",
-        // "https://kalles-backend.onrender.com/api/products",
+        // "/api/products",
+        "https://kalles-backend.onrender.com/api/products",
         formDataToSend,
         { withCredentials: true }
       );
@@ -200,8 +199,8 @@ const ProductManagement = () => {
       }
       // Send the formData with the PUT request
       await axios.put(
-        `/api/products/${id}`,
-        // `https://kalles-backend.onrender.com/api/products/${id}`,
+        // `/api/products/${id}`,
+        `https://kalles-backend.onrender.com/api/products/${id}`,
         formData,
         { withCredentials: true }
       );
@@ -227,8 +226,8 @@ const ProductManagement = () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         await axios.delete(
-          `/api/products/${id}`,
-          // `https://kalles-backend.onrender.com/api/products/${id}`,
+          // `/api/products/${id}`,
+          `https://kalles-backend.onrender.com/api/products/${id}`,
           { withCredentials: true }
         );
         fetchProducts();
@@ -265,7 +264,6 @@ const ProductManagement = () => {
       name: "",
       description: "",
       price: "",
-
       images: [],
       categoryId: "",
     });
@@ -445,7 +443,7 @@ const ProductManagement = () => {
                 <td className="border px-4 py-2 capitalize">
                   {product.description}
                 </td>
-                <td className="border px-4 py-2">{product.categoryId}</td>
+                <td className="border px-4 py-2">{product.categoryId.name}</td>
                 <td className="border px-4 py-2 flex justify-between gap-4">
                   <button
                     onClick={() => openModal(product)}
@@ -510,7 +508,7 @@ const ProductManagement = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log("Form data:", formData);
+            // console.log("Form data:", formData);
             updateProduct(editingProduct._id, formData);
           }}
           className="mb-4 bg-slate-200 px-4 pt-5 pb-4 sm:p-6 sm:pb-4"

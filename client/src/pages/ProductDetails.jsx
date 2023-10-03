@@ -18,8 +18,8 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          // `https://kalles-backend.onrender.com/api/products/${id}`,
-          `/api/products/${id}`,
+          `https://kalles-backend.onrender.com/api/products/${id}`,
+          // `/api/products/${id}`,
           { withCredentials: true }
         );
         setProduct(response.data.data);
@@ -89,8 +89,8 @@ const ProductDetails = () => {
             <div className="flex justify-center relative border p-5">
               {currentImage && (
                 <img
-                  // src={`https://kalles-backend.onrender.com/public/images/${currentImage}`}
-                  src={`http://localhost:5175/public/images/${currentImage}`}
+                  src={`https://kalles-backend.onrender.com/public/images/${currentImage}`}
+                  // src={`http://localhost:5175/public/images/${currentImage}`}
                   alt={name}
                   className="w-full max-h-96 object-cover mb-4"
                 />
@@ -112,8 +112,8 @@ const ProductDetails = () => {
                 product.images.map((thumbnail, index) => (
                   <img
                     key={index}
-                    // src={`https://kalles-backend.onrender.com/public/images/${thumbnail}`}
-                    src={`http://localhost:5175/public/images/${thumbnail}`}
+                    src={`https://kalles-backend.onrender.com/public/images/${thumbnail}`}
+                    // src={`http://localhost:5175/public/images/${thumbnail}`}
                     alt={`Preview ${index + 1}`}
                     className="w-full h-16 object-cover cursor-pointer transition-opacity duration-300 hover:opacity-90"
                     onClick={() => handleThumbnailClick(index)}

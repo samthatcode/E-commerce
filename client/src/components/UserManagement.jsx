@@ -28,8 +28,8 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        // "https://kalles-backend.onrender.com/api/users",
-        "/api/users",
+        "https://kalles-backend.onrender.com/api/users",
+        // "/api/users",
         { withCredentials: true }
       );
       setUsers(response.data.data);
@@ -43,8 +43,8 @@ const UserManagement = () => {
     setIsCreatingUser(true);
     try {
       const response = await axios.post(
-        // "https://kalles-backend.onrender.com/api/signup",
-        "/api/signup",
+        "https://kalles-backend.onrender.com/api/signup",
+        // "/api/signup",
         newUser,
         { withCredentials: true }
       );
@@ -76,8 +76,8 @@ const UserManagement = () => {
     }
     try {
       await axios.put(
-        // `https://kalles-backend.onrender.com/api/users/${id}`,
-        `/api/users/${id}`,
+        `https://kalles-backend.onrender.com/api/users/${id}`,
+        // `/api/users/${id}`,
         updatedUser,
         { withCredentials: true }
       );
@@ -98,8 +98,8 @@ const UserManagement = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
         await axios.delete(
-          // `https://kalles-backend.onrender.com/api/users/${id}`,
-          `/api/users/${id}`,
+          `https://kalles-backend.onrender.com/api/users/${id}`,
+          // `/api/users/${id}`,
           { withCredentials: true }
         );
         fetchUsers();
@@ -119,8 +119,8 @@ const UserManagement = () => {
     setLoading(true);
     try {
       const response = await axios.put(
-        // `https://kalles-backend.onrender.com/api/users/${selectedUser}/assign-role`,
-        `/api/users/${selectedUser}/assign-role`,
+        `https://kalles-backend.onrender.com/api/users/${selectedUser}/assign-role`,
+        // `/api/users/${selectedUser}/assign-role`,
 
         {
           role: selectedRole,

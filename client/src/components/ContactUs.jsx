@@ -33,8 +33,8 @@ const ContactUs = () => {
 
     try {
       await axios.post(
-        // "https://kalles-backend.onrender.com/api/contact",
-        "/api/contact",
+        "https://kalles-backend.onrender.com/api/contact",
+        // "/api/contact",
         formData
       );
 

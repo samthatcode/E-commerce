@@ -19,32 +19,29 @@ const ProductPage = () => {
     useSavedProperties();
 
   const navigate = useNavigate();
-  // const { searchQuery } = useSearch();
-  // const filteredProducts = products.filter((product) =>
-  //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
+
 
   useEffect(() => {
     // Fetch all categories from the database
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          // "https://kalles-backend.onrender.com/api/categories",
-          "/api/categories",
+          "https://kalles-backend.onrender.com/api/categories",
+          // "/api/categories",
           { withCredentials: true }
         );
         setCategories(response.data.data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
-      }
+      } 
     };
 
     // Fetch all products from the database
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          // "https://kalles-backend.onrender.com/api/products",
-          "/api/products",
+          "https://kalles-backend.onrender.com/api/products",
+          // "/api/products",
           { withCredentials: true }
         );
         // console.log(response)
@@ -144,9 +141,9 @@ const ProductPage = () => {
             <div key={product._id}>
               <div
                 className="relative rounded overflow-hidden shadow-xl hover:shadow-teal transition-all hover-card cursor-pointer"
-                onClick={() => {
+                onClick={(e) => {
                   // Check if the click target is not the heart icon
-                  if (!event.target.classList.contains("heart-icon")) {
+                  if (!e.target.classList.contains("heart-icon")) {
                     navigate(`/products/${product._id}`); // Navigate to the details page
                   }
                 }}
@@ -154,8 +151,8 @@ const ProductPage = () => {
                 <div className="image-container">
                   {product.images.length > 0 && (
                     <img
-                      // src={`https://kalles-backend.onrender.com/public/images/${product.images[0]}`}
-                      src={`http://localhost:5175/public/images/${product.images[0]}`}
+                      src={`https://kalles-backend.onrender.com/public/images/${product.images[0]}`}
+                      // src={`http://localhost:5175/public/images/${product.images[0]}`}
                       alt={product.name}
                       className="w-full max-h-60 object-cover p-8 image"
                     />

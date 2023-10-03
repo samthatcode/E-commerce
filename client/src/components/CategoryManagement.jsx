@@ -32,8 +32,8 @@ const CategoryManagement = () => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        // "https://kalles-backend.onrender.com/api/categories",
-        "api/categories",
+        "https://kalles-backend.onrender.com/api/categories",
+        // "api/categories",
 
         { withCredentials: true }
       );
@@ -48,8 +48,8 @@ const CategoryManagement = () => {
     setIsCreatingCategory(true);
     try {
       const response = await axios.post(
-        // "https://kalles-backend.onrender.com/api/categories",
-        "/api/categories",
+        "https://kalles-backend.onrender.com/api/categories",
+        // "/api/categories",
         newCategory,
         { withCredentials: true }
       );
@@ -77,8 +77,8 @@ const CategoryManagement = () => {
     }
     try {
       await axios.put(
-        // `https://kalles-backend.onrender.com/api/categories/${id}`,
-        `api/categories/${id}`,
+        `https://kalles-backend.onrender.com/api/categories/${id}`,
+        // `api/categories/${id}`,
 
         updatedCategory,
         { withCredentials: true }
@@ -102,8 +102,8 @@ const CategoryManagement = () => {
     if (window.confirm("Are you sure you want to delete this category?")) {
       try {
         await axios.delete(
-          // `https://kalles-backend.onrender.com/api/categories/${id}`,
-          `api/categories/${id}`,
+          `https://kalles-backend.onrender.com/api/categories/${id}`,
+          // `api/categories/${id}`,
           { withCredentials: true }
         );
         fetchCategories();
